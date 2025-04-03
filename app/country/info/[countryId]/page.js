@@ -31,7 +31,7 @@ async function page({ params }) {
 
   const curCountry = countries.find((country) => country.cca3 === countryId);
 
-  // if (!curCountry) throw new Error("Error 404 Country is not found");
+  if (!curCountry) throw new Error("Error 404 Country is not found");
 
   const {
     flags: { png, svg },

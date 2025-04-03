@@ -11,16 +11,18 @@ function CountryInfoList({
   borders,
   cca3,
 }) {
-  const langKeys = Object.keys(languages);
+  const langKeys = languages ? Object.keys(languages) : [];
   const langs = langKeys.map((key) => languages[key]);
-  const CurrenciesKeys = Object.keys(currencies);
+  const CurrenciesKeys = currencies ? Object.keys(currencies) : [];
   const curren = CurrenciesKeys.map((key) => currencies[key]);
   const filteredBorders = borders ? filterIsrael(borders) : null;
   return (
     <ul>
       <li className="flex items-center justify-between border-y-1 border-y-black p-5 gap-4">
         <span>capital</span>
-        <span>{capital.join(", ")}</span>
+        <span>
+          {typeof capital === typeof [] ? capital.join(", ") : capital}
+        </span>
       </li>
       {subregion && (
         <li className="flex items-center justify-between border-b-1 border-b-black p-5 gap-4">
@@ -28,7 +30,8 @@ function CountryInfoList({
         </li>
       )}
       <li className="flex items-center justify-between border-b-1 border-b-black p-5 gap-4">
-        <span>languages</span> <span>{langs.join(", ")}</span>
+        <span>languages</span>{" "}
+        <span>{typeof langs === typeof [] ? langs.join(", ") : langs}</span>
       </li>
       <li className="flex items-center justify-between border-b-1 border-b-black p-5 gap-4">
         <span>Currencies</span>{" "}

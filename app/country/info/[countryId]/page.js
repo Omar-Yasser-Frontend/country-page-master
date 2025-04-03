@@ -28,7 +28,7 @@ async function page({ params }) {
     (country) => country.name.common === countryId.replaceAll("_", " ")
   );
 
-  if (!curCountry) throw new Error("Error 404 Country is not found");
+  // if (!curCountry) throw new Error("Error 404 Country is not found");
 
   const {
     flags: { png },

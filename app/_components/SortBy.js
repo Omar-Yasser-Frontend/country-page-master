@@ -11,10 +11,11 @@ function SortBy() {
 
   return (
     <div className="flex flex-col gap-2 mb-8">
-      <label>Sort by</label>
+      <label htmlFor="select">Sort by</label>
       <select
         onChange={handleChange}
         value={sort}
+        id="select"
         className="border-1 border-black py-2 px-4 rounded-md bg-black-bg"
       >
         <option value="all">All</option>

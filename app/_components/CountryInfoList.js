@@ -9,6 +9,7 @@ function CountryInfoList({
   currencies,
   continents,
   borders,
+  cca3,
 }) {
   const langKeys = Object.keys(languages);
   const langs = langKeys.map((key) => languages[key]);
@@ -41,20 +42,19 @@ function CountryInfoList({
         <li className="mb-20 p-5">
           <p className="mb-5">Neighbours Countries</p>
           <div className="flex flex-wrap gap-4 items-center">
-            {filteredBorders.map(({ name: { common }, flags: { png } }) => (
-              <Link
-                href={`/country/info/${common.replaceAll(" ", "_")}`}
-                key={common}
-              >
-                <Image
-                  src={png}
-                  width={100}
-                  height={60}
-                  alt={`image of ${common} flag`}
-                />
-                <p className="text-center">{common}</p>
-              </Link>
-            ))}
+            {filteredBorders.map(
+              ({ name: { common }, flags: { png }, cca3 }) => (
+                <Link href={`/country/info/${cca3}`} key={common}>
+                  <Image
+                    src={png}
+                    width={100}
+                    height={60}
+                    alt={`image of ${common} flag`}
+                  />
+                  <p className="text-center">{common}</p>
+                </Link>
+              )
+            )}
           </div>
         </li>
       )}

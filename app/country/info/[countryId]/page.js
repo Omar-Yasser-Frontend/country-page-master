@@ -6,8 +6,13 @@ import Link from "next/link";
 
 export async function generateMetadata({ params }) {
   const { countryId } = await params;
+
+  const countries = await getCountries();
+
+  const curCountry = countries.find((country) => country.cca3 === countryId);
+
   return {
-    title: `Country Page / ${countryId.replaceAll("_", " ")}`,
+    title: `Country Page / ${curCountry.name.common}`,
   };
 }
 
@@ -15,7 +20,7 @@ export async function generateStaticParams() {
   const countries = await getCountries();
 
   return countries.map((country) => ({
-    countryId: country.name.common.replaceAll(" ", "_"),
+    countryId: country.cca3,
   }));
 }
 
@@ -24,14 +29,12 @@ async function page({ params }) {
 
   const countries = await getCountries();
 
-  const curCountry = countries.find(
-    (country) => country.name.common === countryId.replaceAll("_", " ")
-  );
+  const curCountry = countries.find((country) => country.cca3 === countryId);
 
   // if (!curCountry) throw new Error("Error 404 Country is not found");
 
   const {
-    flags: { png },
+    flags: { png, svg },
     name: { official, common },
     population,
     capital,
@@ -68,7 +71,7 @@ async function page({ params }) {
         className="mx-auto -mt-12 rounded-md mb-5"
         width={350}
         height={350}
-        src={png}
+        src={png || svg}
         alt={`image of ${official} flag`}
       />
       <p className="text-center text-2xl font-semibold">{common}</p>

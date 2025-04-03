@@ -7,12 +7,13 @@ function Country({ country, children }) {
     population,
     area,
     region,
+    cca3,
   } = country;
   if (common === "Israel") return null;
 
   return (
     <Link
-      href={`country/info/${common.replaceAll(" ", "_")}`}
+      href={`country/info/${cca3}`}
       className={`grid grid-cols-[0.6fr_1fr_1fr_1fr] lg:grid-cols-[0.6fr_1fr_1fr_1fr_1fr] cursor-pointer py-2 gap-2 justify-center items-center`}
     >
       {children}
